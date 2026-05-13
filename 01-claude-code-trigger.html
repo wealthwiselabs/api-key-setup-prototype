@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Claude Code — money-wise-adventures</title>
+  <link rel="stylesheet" href="styles/shared.css?v=7" />
+  <link rel="stylesheet" href="styles/terminal.css?v=7" />
+</head>
+<body>
+  <div class="terminal-window">
+    <!-- macOS-style title bar -->
+    <div class="term-titlebar">
+      <div class="term-traffic">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="term-title">eric@macbook — claude — money-wise-adventures — 120×36</div>
+    </div>
+
+    <div class="term-body" id="term-body">
+      <!-- Shell prompt + claude invocation -->
+      <div class="shell-line"><span class="prompt-host">eric@macbook</span> <span class="prompt-path">~/dev/money-wise-adventures</span> <span class="prompt-sign">%</span> <span class="cmd">claude</span></div>
+
+      <!-- Visible by default — page chrome + user's earlier prompt + the tool calls that already ran -->
+      <div class="welcome-banner">
+        <img class="mascot" src="assets/icons/claude-code-mascot.png" alt="Claude Code" />
+        <div class="welcome-text">
+          <div class="welcome-title">Welcome to <span class="accent">Claude Code</span> · v2.1.0</div>
+          <div class="welcome-sub">/help for help, /status for your current setup &nbsp;·&nbsp; cwd: <code>~/dev/money-wise-adventures</code></div>
+        </div>
+      </div>
+
+      <div class="tips">
+        <span class="key">?</span> for shortcuts &nbsp;·&nbsp; <span class="key">esc</span> to interrupt &nbsp;·&nbsp; <span class="key">⏎</span> to send &nbsp;·&nbsp; <span class="key">⇧⏎</span> for new line
+      </div>
+
+      <div class="user-prompt">
+        <span class="chev">&gt;</span>
+        <span class="text">build a lesson generator for the &quot;Lay the foundations&quot; pin on the journey path. use Claude for the actual lesson content.</span>
+      </div>
+
+      <div class="tool-call">
+        <span class="name">Read</span><span class="args">(src/journey/path.tsx)</span>
+        <span class="branch"><span class="label">└─ Read</span> <span class="value">142 lines</span></span>
+      </div>
+      <div class="tool-call">
+        <span class="name">Grep</span><span class="args">(pattern: "lesson", path: "src")</span>
+        <span class="branch"><span class="label">└─ Found</span> <span class="value">3 references in 2 files</span></span>
+      </div>
+
+      <!-- Claude responds -->
+      <div class="ai-bullet reveal" data-step="6">
+        <span class="bullet">●</span>
+        <div class="ai-text">I&apos;ll wire up the Claude API call for the lesson generator and connect it to the &quot;Lay the foundations&quot; pin. To do that I need a Claude API key set as <code>ANTHROPIC_API_KEY</code> in your environment.</div>
+      </div>
+
+      <div class="ai-bullet reveal" data-step="7">
+        <span class="bullet">●</span>
+        <div class="ai-text">No <code>ANTHROPIC_API_KEY</code> found in your environment or <code>frontend/.env</code>. I can start a one-click setup with Anthropic — you&apos;ll approve it in your browser and the key will be written back here automatically.</div>
+      </div>
+
+      <!-- Setup details rendered as plain text inside the terminal -->
+      <div class="reveal" data-step="8">
+<pre class="term-block">    <span class="dim">Setup     </span>  Anthropic API key (one-click)
+    <span class="dim">Status    </span>  <span class="yellow">●</span> waiting for your approval
+    <span class="dim">Key name  </span>  <span class="cyan">Claude Code · money-wise-adventures · May 2026</span>
+    <span class="dim">Env var   </span>  <span class="cyan">ANTHROPIC_API_KEY</span>
+    <span class="dim">Writes to </span>  <span class="cyan">frontend/.env</span></pre>
+      </div>
+
+      <!-- Enter-to-open action prompt: plain terminal text, no animation -->
+      <div class="reveal" data-step="9">
+<pre class="term-block">  Press <span class="white">[Enter]</span> to open <span class="cyan url-link">https://platform.claude.com/setup</span>  ·  <span class="dim">esc to cancel</span></pre>
+      </div>
+
+    </div>
+
+    <!-- Bottom composer — sibling of .term-body, pinned to the window bottom -->
+    <div class="term-composer reveal" data-step="10">
+      <div class="term-composer-box">
+        <span class="chev">&gt;</span>
+        <span class="cursor"></span>
+        <span class="placeholder">Try &quot;edit the lesson UI&quot;</span>
+      </div>
+      <div class="term-composer-hints">
+        <span class="hint">claude-sonnet-4-6 · 124k ctx</span>
+        <span class="hint" style="margin-left:auto"><span class="key">⏎</span> send &nbsp; <span class="key">⇧⏎</span> newline &nbsp; <span class="key">⌃C</span> exit</span>
+      </div>
+      <a href="02-setup-consent.html" class="demo-tip">
+        Demo · press <kbd>Enter</kbd> or <span class="link">click here</span> to continue to the next step
+      </a>
+    </div>
+  </div>
+
+  <script src="styles/stream.js?v=7"></script>
+  <script>
+    (async function () {
+      var body = document.getElementById('term-body');
+
+      // Short beat so the viewer registers the existing context, then start
+      // streaming Claude's actual reply.
+      await delay(450);
+
+      var sequence = [
+        { step: 6, cps: 280, pauseAfter: 280 },   // "I'll wire up..."
+        { step: 7, cps: 280, pauseAfter: 280 },   // "No ANTHROPIC_API_KEY..."
+        { step: 8, cps: 420, pauseAfter: 280 },   // Setup details block
+        { step: 9, cps: 360, pauseAfter: 0   }    // Press Enter prompt
+      ];
+      for (var i = 0; i < sequence.length; i++) {
+        var s = sequence[i];
+        var el = document.querySelector('[data-step="' + s.step + '"]');
+        if (el) {
+          await streamElement(el, s.cps, body);
+          await delay(s.pauseAfter);
+        }
+      }
+
+      fadeIn(10);
+    })();
+
+    // Press Enter (anywhere on the page) to advance to the setup consent screen
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        window.location.href = '02-setup-consent.html';
+      }
+    });
+  </script>
+</body>
+</html>

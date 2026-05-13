@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>One-Click API Key Setup — Prototype Index</title>
+  <link rel="stylesheet" href="styles/shared.css" />
+  <style>
+    body { background: #fafaf9; color: #1a1a1a; padding: 48px; }
+    h1 { font-family: var(--font-serif); font-size: 32px; margin: 0 0 8px; }
+    p.lede { color: #6b6b6b; margin: 0 0 32px; max-width: 640px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 960px; }
+    .card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: border-color 120ms; }
+    .card:hover { border-color: #1a1a1a; }
+    .card .num { font-family: var(--font-mono); color: #6b6b6b; font-size: 12px; }
+    .card h3 { margin: 4px 0 8px; font-size: 16px; font-weight: 600; }
+    .card p { margin: 0; color: #6b6b6b; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>One-Click API Key Setup</h1>
+  <p class="lede">Static mockups for the Anthropic take-home prototype. Click each to open. Take screenshots at 100% browser zoom.</p>
+  <div class="grid">
+    <a class="card" href="01-claude-code-trigger.html">
+      <div class="num">01</div><h3>Claude Code — AI trigger</h3>
+      <p>Claude Code (CLI) discovers no API key, offers a one-click setup, user presses Enter to open the browser.</p>
+    </a>
+    <a class="card" href="02-setup-consent.html">
+      <div class="num">02</div><h3>platform.claude.com/setup — consent</h3>
+      <p>First-time user variant with $5 credits banner and "Claude Code ✓ verified".</p>
+    </a>
+    <a class="card" href="03-setup-success.html">
+      <div class="num">03</div><h3>platform.claude.com/setup — success</h3>
+      <p>Send key to Claude Code (writes to frontend/.env) or download as .env.</p>
+    </a>
+    <a class="card" href="04-claude-code-resume.html">
+      <div class="num">04</div><h3>Claude Code — resumed</h3>
+      <p>Key auto-detected; Claude calls /v1/messages, writes the lesson file, and reports back.</p>
+    </a>
+  </div>
+</body>
+</html>

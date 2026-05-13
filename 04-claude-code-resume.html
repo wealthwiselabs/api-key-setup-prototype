@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Claude Code — money-wise-adventures</title>
+  <link rel="stylesheet" href="styles/shared.css?v=8" />
+  <link rel="stylesheet" href="styles/terminal.css?v=8" />
+</head>
+<body>
+  <div class="terminal-window">
+    <!-- macOS-style title bar -->
+    <div class="term-titlebar">
+      <div class="term-traffic">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="term-title">eric@macbook — claude — money-wise-adventures — 120×36</div>
+    </div>
+
+    <div class="term-body" id="term-body">
+      <!-- Earlier context: the pending setup card from screen 1 (now resolved) -->
+      <div class="user-prompt">
+        <span class="chev">&gt;</span>
+        <span class="text">build a lesson generator for the &quot;Lay the foundations&quot; pin. use Claude for the actual lesson content.</span>
+      </div>
+
+      <div class="ai-bullet">
+        <span class="bullet">●</span>
+        <div class="ai-text">Starting a one-click setup with Anthropic. I&apos;ll write the key to <code>frontend/.env</code> when you finish approving in the browser.</div>
+      </div>
+
+      <!-- Transient spinner: "waiting for key" — removed once the key arrives -->
+      <div class="spinner-line" id="waiting-spinner">
+        <span class="spin-glyph" data-spinner></span>
+        <span class="dim">Waiting for key from platform.claude.com/setup…</span>
+      </div>
+
+      <div class="reveal" data-step="1">
+<pre class="term-block">    <span class="dim">Status     </span>  <span class="green">✓</span> completed · key received
+    <span class="dim">Key name   </span>  <span class="cyan">Claude Code · money-wise-adventures · May 2026</span>
+    <span class="dim">Env var    </span>  <span class="cyan">ANTHROPIC_API_KEY</span> <span class="dim">· loaded from frontend/.env</span>
+    <span class="dim">Fingerprint</span>  <span class="cyan">sk-ant-…a3f2</span>
+    <span class="dim">Credits    </span>  $5.00 starter credit available</pre>
+      </div>
+
+      <!-- Resumed: Claude continues the original request -->
+      <div class="ai-bullet reveal" data-step="2">
+        <span class="bullet">●</span>
+        <div class="ai-text">Key received. Resuming the lesson generator build.</div>
+      </div>
+
+      <div class="tool-call reveal" data-step="3">
+        <span class="name">Bash</span><span class="args">(curl -s https://api.anthropic.com/v1/messages -H "x-api-key: $ANTHROPIC_API_KEY" …)</span>
+        <span class="branch"><span class="label">└─</span> <span class="value">200 OK · 1,742 tokens · 2.3s</span></span>
+      </div>
+
+      <div class="tool-call reveal" data-step="4">
+        <span class="name">Write</span><span class="args">(src/lessons/budgeting-101.json)</span>
+        <span class="branch"><span class="label">└─</span> <span class="value">Created · 124 lines</span></span>
+      </div>
+
+      <div class="tool-call reveal" data-step="5">
+        <span class="name">Edit</span><span class="args">(src/journey/path.tsx)</span>
+        <span class="branch"><span class="label">└─</span> <span class="value">Added 2 lines, removed 1 line</span></span>
+      </div>
+
+      <!-- File diff snippet — unified-diff style with red/green tint rows -->
+      <div class="file-block reveal" data-step="6">
+        <div class="file-head">
+          <span class="path">src/journey/path.tsx</span>
+          <span class="lines-added">+2 <span class="removed">−1</span></span>
+        </div>
+        <div class="file-body">
+          <div class="line"><span class="mark"> </span><span class="ln">42</span><span class="code">  const pins = [</span></div>
+          <div class="line removed"><span class="mark">-</span><span class="ln">43</span><span class="code">    { id: 'foundations', title: 'Lay the foundations' },</span></div>
+          <div class="line added"><span class="mark">+</span><span class="ln">43</span><span class="code">    { id: 'foundations', title: 'Lay the foundations', lesson: lessonLoader('budgeting-101') },</span></div>
+          <div class="line added"><span class="mark">+</span><span class="ln">44</span><span class="code">    { id: 'budgeting',   title: 'Build your budget',   lesson: lessonLoader('budgeting-102') },</span></div>
+          <div class="line"><span class="mark"> </span><span class="ln">45</span><span class="code">  ];</span></div>
+        </div>
+      </div>
+
+      <!-- Final assistant summary -->
+      <div class="ai-bullet reveal" data-step="7">
+        <span class="bullet">●</span>
+        <div class="ai-text"><strong>Done.</strong> The lesson generator is wired up and the &quot;Lay the foundations&quot; pin now loads <code>budgeting-101.json</code> on click. I made one API call to verify the key works ($0.004 spent of your $5 credit). Want me to seed the other two pins as well?</div>
+      </div>
+    </div>
+
+    <!-- Bottom composer — sibling of .term-body, pinned to the window bottom -->
+    <div class="term-composer reveal" data-step="8">
+      <div class="term-composer-box">
+        <span class="chev">&gt;</span>
+        <span class="cursor"></span>
+        <span class="placeholder">Try &quot;seed budgeting-102 and savings-101&quot;</span>
+      </div>
+      <div class="term-composer-hints">
+        <span class="hint">claude-sonnet-4-6 · 124k ctx · $0.004 spent</span>
+        <span class="hint" style="margin-left:auto"><span class="key">⏎</span> send &nbsp; <span class="key">⇧⏎</span> newline &nbsp; <span class="key">⌃C</span> exit</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="styles/stream.js?v=8"></script>
+  <script>
+    (async function () {
+      var body = document.getElementById('term-body');
+      var spinnerStop = startSpinner();
+
+      // Spinner ticks for ~1.6s while "waiting for key", then collapses
+      await delay(1600);
+      var sp = document.getElementById('waiting-spinner');
+      if (sp) sp.classList.add('is-gone');
+      spinnerStop();
+
+      // Each terminal output block streams in like real Claude Code output
+      var sequence = [
+        { step: 1, cps: 350, pauseAfter: 300 },   // status block
+        { step: 2, cps: 280, pauseAfter: 250 },   // "Key received..."
+        { step: 3, cps: 350, pauseAfter: 280 },   // Bash tool call
+        { step: 4, cps: 350, pauseAfter: 280 },   // Write tool call
+        { step: 5, cps: 350, pauseAfter: 280 },   // Edit tool call
+        { step: 6, cps: 450, pauseAfter: 300 },   // file diff (slightly faster — repetitive code)
+        { step: 7, cps: 260, pauseAfter: 0   }    // final "Done." summary
+      ];
+      for (var i = 0; i < sequence.length; i++) {
+        var s = sequence[i];
+        var el = document.querySelector('[data-step="' + s.step + '"]');
+        if (el) {
+          await streamElement(el, s.cps, body);
+          await delay(s.pauseAfter);
+        }
+      }
+
+      // Composer fades in normally (UI chrome, not output)
+      fadeIn(8);
+    })();
+  </script>
+</body>
+</html>

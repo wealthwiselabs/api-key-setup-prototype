@@ -1,0 +1,112 @@
+<!doctype html>
+<!-- Composite page for taking a single screenshot of all 5 frames for the take-home doc. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Flow figure — One-Click API Key Setup</title>
+  <link rel="stylesheet" href="styles/shared.css" />
+  <style>
+    body { background: #fafaf9; padding: 32px; color: #1a1a1a; }
+    .figure-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      margin: 0 0 4px;
+      font-weight: 500;
+    }
+    .figure-sub {
+      font-size: 14px; color: #57534e; margin: 0 0 28px;
+    }
+    .row {
+      display: flex; gap: 18px; margin-bottom: 24px;
+      align-items: flex-start;
+    }
+    .panel {
+      background: white;
+      border: 1px solid #e7e5e4;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      display: flex; flex-direction: column;
+    }
+    .panel-header {
+      padding: 8px 12px;
+      background: #1a1a1a;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .panel-header .num {
+      background: white; color: #1a1a1a;
+      width: 18px; height: 18px; border-radius: 999px;
+      display: grid; place-items: center;
+      font-size: 11px; font-weight: 700;
+    }
+    .panel-frame {
+      position: relative;
+      overflow: hidden;
+    }
+    .panel-frame iframe {
+      border: 0;
+      position: absolute; top: 0; left: 0;
+      transform-origin: top left;
+    }
+    /* Terminal iframes are 1440x900, scale 0.3 → 432x270 */
+    .panel-frame.terminal { width: 432px; height: 270px; }
+    .panel-frame.terminal iframe { width: 1440px; height: 900px; transform: scale(0.3); }
+    /* Anthropic console iframes target 1200x900, scale 0.3 → 360x270 */
+    .panel-frame.console { width: 360px; height: 270px; }
+    .panel-frame.console iframe { width: 1200px; height: 900px; transform: scale(0.3); }
+
+    .caption {
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #57534e;
+      border-top: 1px solid #f0eeec;
+      background: #fafaf9;
+      line-height: 1.5;
+    }
+    .caption .label {
+      font-weight: 600;
+      color: #1a1a1a;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: white; padding: 1px 6px; border-radius: 4px; border: 1px solid #e7e5e4;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="figure-title">One-Click API Key Setup — full flow</h1>
+  <p class="figure-sub">CLI initiates → verified consent → key issued → CLI resumes automatically. Four frames, read left-right, top-bottom.</p>
+
+  <!-- Row 1: the "going to setup" arc -->
+  <div class="row">
+    <div class="panel">
+      <div class="panel-header"><span class="num">1</span> Claude Code initiates</div>
+      <div class="panel-frame.terminal"><iframe src="01-claude-code-trigger.html" scrolling="no"></iframe></div>
+      <div class="caption"><span class="label">Claude Code</span>CLI detects no <code>ANTHROPIC_API_KEY</code>; user presses <kbd>⏎</kbd> to open the verified browser handoff.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="num">2</span> Verified consent</div>
+      <div class="panel-frame console"><iframe src="02-setup-consent.html" scrolling="no"></iframe></div>
+      <div class="caption"><span class="label">platform.claude.com/setup</span>User authenticates to Anthropic; the verified-tool slug drives the trust badge.</div>
+    </div>
+  </div>
+
+  <!-- Row 2: the "coming back" arc -->
+  <div class="row">
+    <div class="panel">
+      <div class="panel-header"><span class="num">3</span> Key issued</div>
+      <div class="panel-frame console"><iframe src="03-setup-success.html" scrolling="no"></iframe></div>
+      <div class="caption"><span class="label">platform.claude.com/setup</span>One click sends the key directly to <code>frontend/.env</code> — nothing to paste.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="num">4</span> Claude Code resumes</div>
+      <div class="panel-frame.terminal"><iframe src="04-claude-code-resume.html" scrolling="no"></iframe></div>
+      <div class="caption"><span class="label">Claude Code</span>CLI auto-detects the key, calls <code>/v1/messages</code>, writes the lesson file, and reports back.</div>
+    </div>
+  </div>
+</body>
+</html>

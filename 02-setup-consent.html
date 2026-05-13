@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Set up Claude — Anthropic</title>
+  <link rel="stylesheet" href="styles/shared.css" />
+  <link rel="stylesheet" href="styles/console.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="setup-page">
+    <div class="setup-topbar">
+      <div class="icon">A</div>
+      <span>Claude Console</span>
+    </div>
+
+    <div class="setup-main">
+      <div class="setup-card">
+        <div class="eyebrow">
+          <span class="verified"><i data-lucide="check" style="width:12px;height:12px"></i> Claude Code verified</span>
+          <span>requesting an API key</span>
+        </div>
+
+        <h1>Set up Claude for Claude Code</h1>
+        <p class="sub">Claude Code on your MacBook wants to create a Claude API key on your Anthropic account for the project <strong>"money-wise-adventures."</strong> The key will be billed to your account. You can revoke it anytime in the Console.</p>
+
+        <div class="device-line">
+          <i data-lucide="laptop" style="width:14px;height:14px"></i>
+          Request from your MacBook · San Francisco · just now
+        </div>
+
+        <div class="kv-list">
+          <div class="kv-row">
+            <span class="k">Key name</span>
+            <span class="v"><span class="editable">Claude Code · money-wise-adventures · May 2026 <i data-lucide="pencil" style="width:12px;height:12px"></i></span></span>
+          </div>
+          <div class="kv-row">
+            <span class="k">Env var</span>
+            <span class="v"><code>ANTHROPIC_API_KEY</code></span>
+          </div>
+          <div class="kv-row">
+            <span class="k">Permissions</span>
+            <span class="v">Standard API access</span>
+          </div>
+          <div class="kv-row">
+            <span class="k">Billing</span>
+            <span class="v">Your Anthropic account</span>
+          </div>
+        </div>
+
+        <div class="banner">
+          <span class="emoji">🎁</span>
+          <div><strong>New to Anthropic?</strong> You'll get $5 in free credits applied automatically when you create your first key.</div>
+        </div>
+
+        <p class="fineprint">By approving, you authorize Anthropic to mint a standard API key on your account. Claude Code will write the key to <code style="font-family:var(--font-mono);background:#faf9f7;padding:1px 5px;border-radius:3px;border:1px solid #e7e5e4">frontend/.env</code> on your machine — the key never leaves your device. <a href="#" style="color:#0f766e;text-decoration:underline">Learn more</a>.</p>
+
+        <div class="btn-row">
+          <a class="btn btn-secondary" href="01-claude-code-trigger.html" style="text-decoration:none;display:inline-flex;align-items:center">Deny</a>
+          <a class="btn btn-primary" href="03-setup-success.html" style="text-decoration:none;display:inline-flex;align-items:center">Approve</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
