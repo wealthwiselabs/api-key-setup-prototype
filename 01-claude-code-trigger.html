@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <title>Claude Code — money-wise-adventures</title>
-  <link rel="stylesheet" href="styles/shared.css?v=7" />
-  <link rel="stylesheet" href="styles/terminal.css?v=7" />
+  <link rel="stylesheet" href="styles/shared.css?v=8" />
+  <link rel="stylesheet" href="styles/terminal.css?v=8" />
 </head>
 <body>
   <div class="terminal-window">
@@ -57,10 +57,16 @@
 
       <div class="ai-bullet reveal" data-step="7">
         <span class="bullet">●</span>
-        <div class="ai-text">No <code>ANTHROPIC_API_KEY</code> found in your environment or <code>frontend/.env</code>. I can start a one-click setup with Anthropic — you&apos;ll approve it in your browser and the key will be written back here automatically.</div>
+        <div class="ai-text">No <code>ANTHROPIC_API_KEY</code> found in your environment or <code>frontend/.env</code>. Run <code class="slash">/api-key</code> to start a one-click setup with Anthropic — you&apos;ll approve it in your browser and the key will be written back here automatically.</div>
       </div>
 
-      <!-- Setup details rendered as plain text inside the terminal -->
+      <!-- User invokes the slash command -->
+      <div class="user-prompt reveal" data-step="7b">
+        <span class="chev">&gt;</span>
+        <span class="text"><span class="slash">/api-key</span></span>
+      </div>
+
+      <!-- /api-key output: setup details rendered as plain text inside the terminal -->
       <div class="reveal" data-step="8">
 <pre class="term-block">    <span class="dim">Setup     </span>  Anthropic API key (one-click)
     <span class="dim">Status    </span>  <span class="yellow">●</span> waiting for your approval
@@ -93,7 +99,7 @@
     </div>
   </div>
 
-  <script src="styles/stream.js?v=7"></script>
+  <script src="styles/stream.js?v=8"></script>
   <script>
     (async function () {
       var body = document.getElementById('term-body');
@@ -103,10 +109,11 @@
       await delay(450);
 
       var sequence = [
-        { step: 6, cps: 280, pauseAfter: 280 },   // "I'll wire up..."
-        { step: 7, cps: 280, pauseAfter: 280 },   // "No ANTHROPIC_API_KEY..."
-        { step: 8, cps: 420, pauseAfter: 280 },   // Setup details block
-        { step: 9, cps: 360, pauseAfter: 0   }    // Press Enter prompt
+        { step: '6',  cps: 280, pauseAfter: 280 },   // "I'll wire up..."
+        { step: '7',  cps: 280, pauseAfter: 450 },   // "No ANTHROPIC_API_KEY... Run /api-key"
+        { step: '7b', cps: 25,  pauseAfter: 350 },   // user types `/api-key` (slow, like typing)
+        { step: '8',  cps: 420, pauseAfter: 280 },   // /api-key output: setup details
+        { step: '9',  cps: 360, pauseAfter: 0   }    // Press Enter prompt
       ];
       for (var i = 0; i < sequence.length; i++) {
         var s = sequence[i];

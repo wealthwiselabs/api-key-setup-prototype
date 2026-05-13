@@ -163,6 +163,21 @@ html, body {
 .user-prompt .chev { color: var(--term-white); flex-shrink: 0; }
 .user-prompt .text { color: var(--term-white); }
 
+/* Slash command — distinct cyan accent so /api-key reads as a command,
+   both when the user types it and when Claude suggests it inline. */
+.user-prompt .text .slash {
+  color: var(--term-cyan);
+  font-weight: 500;
+}
+code.slash {
+  color: var(--term-cyan);
+  background: #1f1f1f;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
 /* Claude / assistant bullet line */
 .ai-bullet {
   display: flex;
